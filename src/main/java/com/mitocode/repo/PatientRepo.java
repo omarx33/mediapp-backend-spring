@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 public class PatientRepo {
 
     public String sayHello(Patient patient){
-        return "hola "+ patient.getName();
+        return "hola "+ patient.getFirstName();
     }
 }

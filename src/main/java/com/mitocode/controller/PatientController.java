@@ -17,8 +17,8 @@ public class PatientController {
 
     @GetMapping  /* recuperar información  */
     public String sayHello(){
-        Patient patient = new Patient(1,"mitocode");
-        return service.sayHello(patient);
+      //  Patient patient = new Patient(1,"mitocode");
+        return service.sayHello(null);
     }
 
 }
