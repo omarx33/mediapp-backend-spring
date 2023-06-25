@@ -15,15 +15,15 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPatient;
-    @Column(name = "idPaciente", length = 70, nullable = false)
+    @Column(name = "nombres", length = 70, nullable = false)
     private String firstName;
-    @Column( length = 70, nullable = false)
-    private String lasttName;
+    @Column( name = "apellidos",length = 70, nullable = false)
+    private String lastName;
     @Column( length = 8, nullable = false)
     private String dni;
-    @Column( length = 150)
+    @Column( name = "direccion",length = 150)
     private String address;
-    @Column( length = 9, nullable = false)
+    @Column( name = "telefono",length = 9, nullable = false)
     private String phone;
     @Column( length = 55, nullable = false)
     private String email;
