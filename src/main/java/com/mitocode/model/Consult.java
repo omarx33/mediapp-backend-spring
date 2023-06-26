@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,4 +31,10 @@ public class Consult {
     private String numConsult;
     @Column(nullable = false)
     private LocalDateTime consultDate;
+
+    //agregar varios detalles al mismo tiempo de registro de maestro
+    // mappedBy - se ase referencia al atributo (consult) de consultDetail,cascade - lo que le aga al padre tbm se ara al detalle
+    @OneToMany(mappedBy = "consult",cascade = {CascadeType.ALL},orphanRemoval = true)
+    private List<ConsultDetail>details;
+
 }
