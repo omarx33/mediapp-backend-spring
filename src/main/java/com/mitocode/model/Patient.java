@@ -9,11 +9,13 @@ import lombok.*;
 @Setter
 @ToString
 @Entity
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "Paciente")
 public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Integer idPatient;
     @Column(name = "nombres", length = 70, nullable = false)
     private String firstName;
