@@ -1,10 +1,9 @@
 package com.mitocode.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,4 +24,11 @@ public class User {
     private String password;
     @Column(nullable = false)
     private boolean enabled;
+
+    @ManyToMany(fetch = FetchType.EAGER) //muchos menus tendran muchos roles
+    @JoinTable(name = "user_role", //nombre tabla que va a crear
+            joinColumns =  @JoinColumn(name = "id_user", referencedColumnName = "idUser"), //idMenu de pk de esta tabla
+            inverseJoinColumns = @JoinColumn(name = "id_role", referencedColumnName = "idRole") // de la tabla Role
+    )
+    private List<Role> roles;
 }
