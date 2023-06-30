@@ -1,14 +1,15 @@
-package com.mitocode.service;
+package com.mitocode.service.impl;
 
 
 import com.mitocode.model.Patient;
+import com.mitocode.repo.IGenericRepo;
 import com.mitocode.repo.iPatientRepo;
+import com.mitocode.service.iPatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 
 // stereotipo de spring
@@ -21,10 +22,18 @@ todos funcionan igual
  */
 @Service
 
-public class PatientService implements iPatientService {
+public  class PatientServiceImpl extends CRUDImpl<Patient, Integer> implements iPatientService {
 
     @Autowired
     private iPatientRepo repo;
+
+    @Override
+    protected IGenericRepo<Patient, Integer> getRepo() {
+        return repo;
+    }
+    // esto es solo para separar y tener algo generico para cruds,
+    // si ay alguna consulta o query diferente se debe generar aqui con la misma estructura comentada abajo
+    /*
     @Override
     public Patient save(Patient patient) {
         return repo.save(patient);
@@ -53,4 +62,6 @@ public class PatientService implements iPatientService {
     public void delete(Integer id) {
     repo.deleteById(id);
     }
+
+     */
 }

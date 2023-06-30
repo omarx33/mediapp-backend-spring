@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
-public interface iPatientRepo extends JpaRepository<Patient, Integer> {
+public interface iPatientRepo extends IGenericRepo<Patient, Integer> {
 
 }
