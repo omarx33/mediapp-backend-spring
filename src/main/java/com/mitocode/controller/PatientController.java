@@ -1,5 +1,6 @@
 package com.mitocode.controller;
 
+import com.mitocode.exception.ModelNotFoundException;
 import com.mitocode.model.Patient;
 import com.mitocode.service.iPatientService;
 
@@ -30,6 +31,10 @@ public class PatientController {
     @GetMapping("/{id}")
     public ResponseEntity<Patient> findById(@PathVariable("id") Integer id){
         Patient obj = service.findById(id);
+
+        if (obj == null){
+            throw new ModelNotFoundException("ID NO EXISTE: "+ id);
+        }
         return new ResponseEntity<>(obj,HttpStatus.OK);
     }
 
