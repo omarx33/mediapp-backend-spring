@@ -13,10 +13,10 @@ public class PatientDTO {
     @EqualsAndHashCode.Include
     private Integer idPatient;
     @NotNull
-    @Size(min=3, message = "Error in firstName")
+    @Size(min=3, message = "{firstName.size}")
     private String firstName;
     @NotNull
-    @Size(min=3, message = "Error in lastName")
+    @Size(min=3, message = "{lastname.size}")
     private String lastName;
 
 
