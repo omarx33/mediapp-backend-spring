@@ -8,6 +8,8 @@ import com.mitocode.service.iPatientService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @RequestMapping("/patients")
 
@@ -69,7 +73,26 @@ public class PatientController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Integer id){
+        Patient obj = service.findById(id);
+        if (obj == null){
+            throw new ModelNotFoundException("Id no existe: "+ id);
+        }
         service.delete(id);
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/hateoas/{id}")
+    public EntityModel<PatientDTO> findByIdHateoas(@PathVariable("id") Integer id){
+        Patient obj = service.findById(id);
+        if (obj == null){
+            throw new ModelNotFoundException("Id no existe: "+ id);
+        }
+
+        EntityModel<PatientDTO> resource = EntityModel.of(mapper.map(obj, PatientDTO.class));
+        WebMvcLinkBuilder link1 = linkTo(methodOn(this.getClass()).findById(id));
+        resource.add(link1.withRel("patient-info1"));
+        return resource;
+    }
+
 }
